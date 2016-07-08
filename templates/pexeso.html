@@ -16,7 +16,7 @@
 {% if pexeso.sound %}
     <script>
                 var audioElement = document.createElement('audio');
-                audioElement.setAttribute('src', '{% static 'static' %}/data/{{ pexeso.pexeso_file }}/{{ pexeso.sound }}');
+                audioElement.setAttribute('src', '{% static '.' %}/data/{{ pexeso.pexeso_file }}/{{ pexeso.sound }}');
                 audioElement.play();
     </script>
 {% endif %}
@@ -40,7 +40,7 @@
 <table>
 <tr>
 {% for card in pexeso.cards %}
-    <td>{% if not pexeso.no_turns_left and not card.visible %}<a href="{% url 'tah' forloop.counter %}">{% endif %}<img width="100px" src="/static/data/{{ pexeso.pexeso_file }}/{% if card.visible %}{{ card.image }}{% else %}pexeso.jpg{% endif %}">{% if not pexeso.no_turns_left and not card.visible  %}</a>{% endif %}</td>
+    <td>{% if not pexeso.no_turns_left and not card.visible %}<a href="{% url 'tah' forloop.counter %}">{% endif %}<img width="100px" src="/static/data/{{ pexeso.pexeso_file }}/{% if card.correct %}{{ card.image }}{% elif card.visible %}{{ card.hidden }}{% else %}pexeso.jpg{% endif %}">{% if not pexeso.no_turns_left and not card.visible  %}</a>{% endif %}</td>
     {% if forloop.counter|divisibleby:7 %}
 </tr><tr>
     {% endif %}

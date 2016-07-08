@@ -16,11 +16,13 @@ class Player:
 
 class Card:
 
-    def __init__(self,id,image,sound,visible):
+    def __init__(self,id,hidden,sound,image,visible,correct):
         self.id = id
         self.image = image
         self.sound = sound
         self.visible = visible
+        self.correct = correct
+        self.hidden = hidden
 
 
 class Pexeso:
@@ -61,7 +63,7 @@ class Pexeso:
                     break
                 line = line.split(':')
                 for j in range(self.cards_multiple):
-                    self.cards.append(Card(i,line[0],line[1],False))
+                    self.cards.append(Card(i,line[0],line[1],line[2],False,False))
 
     def close(self):
 
@@ -69,6 +71,8 @@ class Pexeso:
             for i in self.opened:
                 self.cards[i].visible = False
         elif len(self.opened) == self.cards_multiple:
+            for i in self.opened:
+                self.cards[i].correct = True
             self.players[self.na_tahu].score += 1
             self.na_tahu += self.cards_multiple-1
             self.na_tahu %= self.cards_multiple

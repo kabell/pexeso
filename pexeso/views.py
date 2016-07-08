@@ -3,8 +3,8 @@ from django.shortcuts import render
 import os,re,random,jsonpickle
 from django.http import HttpResponse
 
-pexeso_dir = 'pexeso/pexeso_data'
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+pexeso_dir = BASE_DIR+'/pexeso/pexeso_data'
 
 class Player:
 

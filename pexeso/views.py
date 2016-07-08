@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.shortcuts import render
 import os,re,random,jsonpickle
 from django.http import HttpResponse

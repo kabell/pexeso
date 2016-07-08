@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load staticfiles %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
+
+<link rel="stylesheet" href="{% static "/static/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "/static/css/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" href="{% static "/static/css/style.css" %}">
+
+</head>
+
+<body>
+<div id="sound"></div>
+{% if pexeso.sound %}
+    <script>
+                var audioElement = document.createElement('audio');
+                audioElement.setAttribute('src', '{% static '/static' %}/data/{{ pexeso.pexeso_file }}/{{ pexeso.sound }}');
+                audioElement.play();
+    </script>
+{% endif %}
+{% if pexeso.no_turns_left %}
+<div class="pokracovat"><h2>
+    <a href="{% url 'clear' %}" class="pokracovat" style="color:{{ pexeso.hlaska_color }}">{{ pexeso.hlaska }} Klikni sem na pokračovanie</a>
+    </h2></div>
+{% endif %}
+
+<div class="top">
+<h1>Pexeso {{ pexeso.name }} - na ťahu je tím {{ pexeso.na_tahu_name.name }}</h1>
+</div>
+<div class="info">
+<h3>Skóre:<br/>
+    {% for player in pexeso.players %}
+        {{ player.name }}:{{ player.score }}<br/>
+    {% endfor %}
+</h3>
+</div>
+
+<table>
+<tr>
+{% for card in pexeso.cards %}
+    <td>{% if not pexeso.no_turns_left and not card.visible %}<a href="{% url 'tah' forloop.counter %}">{% endif %}<img width="100px" src="/static/data/{{ pexeso.pexeso_file }}/{% if card.visible %}{{ card.image }}{% else %}pexeso.jpg{% endif %}">{% if not pexeso.no_turns_left and not card.visible  %}</a>{% endif %}</td>
+    {% if forloop.counter|divisibleby:7 %}
+</tr><tr>
+    {% endif %}
+{% endfor %}
+
+</tr>
+</table>
+</body>
+</html>

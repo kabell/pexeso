@@ -1,0 +1,62 @@
+<html>
+<head>
+    {% load staticfiles %}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,900|Quicksand:400,700|Questrial" rel="stylesheet" />
+
+<link rel="stylesheet" href="{% static "/static/css/bootstrap.min.css" %}">
+    <link rel="stylesheet" href="{% static "/static/css/bootstrap-theme.min.css" %}">
+    <link rel="stylesheet" href="{% static "/static/css/style.css" %}">
+
+<script>
+
+    function update_fields() {
+        var number = parseInt(document.getElementById('number_of_players').value,10);
+
+        for(i=0; i<100; i++){
+
+            elem = document.getElementById('player'+ i);
+            if(elem == null && i<number){
+
+                var div = document.createElement("div");
+                div.id = "player"+i;
+                div.appendChild(document.createTextNode("Tím  " + (i+1)));
+                var input = document.createElement("input");
+                input.name = 'player' + i;
+                div.appendChild(input)
+
+
+                var element = document.getElementById("players");
+                element.appendChild(div)
+
+            }
+            else if(elem != null && i>=number){
+                elem.parentNode.removeChild(elem);
+            }
+        }
+
+
+    }
+</script>
+
+</head>
+
+<body>
+<h1>Nastavenia hry Pexeso</h1><br/>
+<form action="{% url 'index' %}" method="post">
+            {% csrf_token %}
+    <h3>Vyber ktoré pexeso chceš hrať:</h3><br/>
+    <select name="pexeso_file">
+        {% for file in pexesos %}
+        <option value="{{ file }}">{{ file }}</option>
+        {% endfor %}
+    </select><br/>
+
+
+<h3>Počet hráčov:</h3> <input type="text" id='number_of_players' name='number_of_players' oninput="update_fields()"/><br/>
+    <div id="players"></div>
+    <input type="submit" value="Štart">
+    </form>
+</body>
+</html>

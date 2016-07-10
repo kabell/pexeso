@@ -21,7 +21,7 @@ td{
 }
 
 a {
-    color:black;
+    color:white;
 
 }
 .question{
@@ -30,12 +30,13 @@ a {
     background-color: #9acfea;
 
     font-size: 40px;
+    color:black;
 
 }
 
 .top{
     font-size: 40px;
-    color: black;
+    color: white;
     margin-bottom: 50;
     text-align:center;
     float: right;
@@ -44,7 +45,9 @@ a {
 }
 .info{
     float:left;
+    margin-left: 40px;
     width:20%;
+    color: white;
 
 }
 

@@ -22,7 +22,13 @@
 {% endif %}
 {% if pexeso.no_turns_left %}
 <div class="pokracovat"><h2>
-    <a href="{% url 'clear' %}" class="pokracovat" style="color:{{ pexeso.hlaska_color }}">{{ pexeso.hlaska }} Klikni sem na pokračovanie</a>
+    <a href="{% url 'clear' %}" class="pokracovat" style="color:{{ pexeso.hlaska_color }}">{{ pexeso.hlaska }}</a>
+    <script>
+        setTimeout(red, 3000);
+        function red(){
+            window.location.replace('{% url 'clear' %}');
+        }
+    </script>
     </h2></div>
 {% endif %}
 
@@ -30,7 +36,7 @@
 <h1>Pexeso {{ pexeso.name }} - na ťahu je tím {{ pexeso.na_tahu_name.name }}</h1>
 </div>
 <div class="info">
-<h3>Skóre:<br/>
+<h3>Skóre:<br/><br/>
     {% for player in pexeso.players %}
         {{ player.name }}:{{ player.score }}<br/>
     {% endfor %}

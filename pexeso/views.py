@@ -74,8 +74,8 @@ class Pexeso:
             for i in self.opened:
                 self.cards[i].correct = True
             self.players[self.na_tahu].score += 1
-            self.na_tahu += self.cards_multiple-1
-            self.na_tahu %= self.cards_multiple
+            self.na_tahu += self.number_of_players-1
+            self.na_tahu %= self.number_of_players
         self.na_tahu += 1
         self.na_tahu %= self.number_of_players
         self.na_tahu_name = self.players[self.na_tahu]
@@ -144,6 +144,7 @@ def index(request,cardid=-1):
 
     request.session['Pexeso'] = jsonpickle.encode(pexeso)
     if pexeso.zostava == 0:
+
         return render(request, 'vysledky.html',locals())
 
     return render(request, 'pexeso.html',locals())

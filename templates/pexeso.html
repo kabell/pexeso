@@ -22,7 +22,7 @@
 {% endif %}
 {% if pexeso.no_turns_left %}
 <div class="pokracovat"><h2>
-    <a href="{% url 'clear' %}" class="pokracovat" style="color:{{ pexeso.hlaska_color }}">{{ pexeso.hlaska }}</a>
+    <a href="{% url 'clear' %}" class="pokracovat" style="color:{{ pexeso.hlaska_color }};position:fixed; top:5px; left:40%">{{ pexeso.hlaska }}</a>
     <script>
         setTimeout(red, 3000);
         function red(){
